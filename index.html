@@ -5,165 +5,423 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yogesh Sharma Neupane - Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            secondary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
     /* Smooth scroll */
     html { scroll-behavior: smooth; }
+    
     /* Fade-in animation for sections */
-    .section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .section.visible { opacity: 1; transform: translateY(0); }
+    .section { 
+      opacity: 0; 
+      transform: translateY(30px); 
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+    }
+    .section.visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+    
     /* Hover effect for cards */
-    .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+    .card { 
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    .card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); 
+    }
+    
+    /* Custom animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .floating {
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(90deg, #3b82f6, #0ea5e9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2563eb;
+    }
   </style>
 </head>
-<body class="bg-gray-100 font-sans text-gray-800">
+<body class="bg-gray-50 font-sans text-gray-800">
   <!-- Navbar -->
-  <nav class="bg-blue-900 text-white fixed w-full z-10 top-0 shadow-md">
+  <nav class="bg-white text-gray-800 fixed w-full z-10 top-0 shadow-md">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold">Yogesh Sharma Neupane</h1>
-      <ul class="flex space-x-6">
-        <li><a href="#home" class="hover:text-blue-300 transition">Home</a></li>
-        <li><a href="#education" class="hover:text-blue-300 transition">Education</a></li>
-        <li><a href="#experience" class="hover:text-blue-300 transition">Experience</a></li>
-        <li><a href="#research" class="hover:text-blue-300 transition">Research</a></li>
-        <li><a href="#awards" class="hover:text-blue-300 transition">Awards</a></li>
+      <h1 class="text-xl font-bold gradient-text">Yogesh Sharma Neupane</h1>
+      <ul class="hidden md:flex space-x-8">
+        <li><a href="#home" class="hover:text-primary-600 transition font-medium">Home</a></li>
+        <li><a href="#education" class="hover:text-primary-600 transition font-medium">Education</a></li>
+        <li><a href="#experience" class="hover:text-primary-600 transition font-medium">Experience</a></li>
+        <li><a href="#research" class="hover:text-primary-600 transition font-medium">Research</a></li>
+        <li><a href="#awards" class="hover:text-primary-600 transition font-medium">Awards</a></li>
       </ul>
+      <!-- Mobile menu button -->
+      <button class="md:hidden text-gray-600">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-700 to-indigo-900 text-white">
-    <div class="container mx-auto px-4 text-center section">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">Yogesh Sharma Neupane</h1>
-      <p class="text-xl mb-6">Hydropower Engineer | Researcher | Nepal</p>
-      <p class="text-lg mb-8 max-w-2xl mx-auto">Specializing in hydraulics design, reservoir optimization, and sustainable energy systems.</p>
-      <a href="mailto:yogesh.s.neupane@gmail.com" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-full transition">Contact Me</a>
+  <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-100 pt-16">
+    <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-12 md:mb-0 section">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-gray-900">Yogesh Sharma Neupane</h1>
+        <p class="text-xl md:text-2xl mb-6 text-primary-700 font-semibold">Hydropower Engineer | Researcher</p>
+        <p class="text-lg mb-8 max-w-2xl text-gray-700">Specializing in hydraulics design, reservoir optimization, and sustainable energy systems in Nepal.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="mailto:yogesh.s.neupane@gmail.com" class="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-full transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <i class="fas fa-envelope mr-2"></i>Contact Me
+          </a>
+          <a href="#experience" class="bg-white hover:bg-gray-100 text-primary-700 font-semibold py-3 px-8 rounded-full transition border-2 border-primary-600 shadow">
+            <i class="fas fa-briefcase mr-2"></i>View Work
+          </a>
+        </div>
+      </div>
+      <div class="md:w-1/2 flex justify-center section">
+        <div class="relative">
+          <div class="w-64 h-64 md:w-80 md:h-80 bg-primary-500 rounded-full floating opacity-20 absolute -z-10"></div>
+          <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-primary-400 to-secondary-500 rounded-2xl shadow-2xl flex items-center justify-center">
+            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-56 h-56 md:w-72 md:h-72" />
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Education Section -->
-  <section id="education" class="py-16 bg-white">
+  <section id="education" class="py-20 bg-white">
     <div class="container mx-auto px-4 section">
-      <h2 class="text-3xl font-bold text-center mb-12">Academic Qualifications</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">M.Sc in Hydropower Engineering</h3>
-          <p class="text-gray-600">Pulchowk Campus, Tribhuvan University, Nepal</p>
-          <p class="text-gray-600">Completed: April 2025 | GPA: 89.07%</p>
-          <p class="text-gray-600">Thesis: Optimizing Reservoir Operations on Nepalese Hydropower Systems</p>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 text-gray-900">Academic Qualifications</h2>
+        <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-primary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-graduation-cap text-primary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900">M.Sc in Hydropower Engineering</h3>
+              <p class="text-gray-600 font-medium">Pulchowk Campus, Tribhuvan University</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-2"><i class="fas fa-calendar-alt text-primary-500 mr-2"></i>Completed: April 2025</p>
+          <p class="text-gray-700 mb-2"><i class="fas fa-chart-line text-primary-500 mr-2"></i>GPA: 89.07%</p>
+          <p class="text-gray-700"><i class="fas fa-book text-primary-500 mr-2"></i>Thesis: Optimizing Reservoir Operations on Nepalese Hydropower Systems</p>
         </div>
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">BE in Civil Engineering</h3>
-          <p class="text-gray-600">Pulchowk Campus, Tribhuvan University, Nepal</p>
-          <p class="text-gray-600">Completed: 2022 | GPA: 79.67%</p>
+        
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-primary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-building text-primary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900">BE in Civil Engineering</h3>
+              <p class="text-gray-600 font-medium">Pulchowk Campus, Tribhuvan University</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-2"><i class="fas fa-calendar-alt text-primary-500 mr-2"></i>Completed: 2022</p>
+          <p class="text-gray-700"><i class="fas fa-chart-line text-primary-500 mr-2"></i>GPA: 79.67%</p>
         </div>
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">High School (10+2), Natural Sciences</h3>
-          <p class="text-gray-600">Tilottama Campus, Yogikuti, Nepal</p>
-          <p class="text-gray-600">Completed: 2017 | GPA: 82.60%</p>
+        
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-primary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-flask text-primary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900">High School (10+2), Natural Sciences</h3>
+              <p class="text-gray-600 font-medium">Tilottama Campus, Yogikuti</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-2"><i class="fas fa-calendar-alt text-primary-500 mr-2"></i>Completed: 2017</p>
+          <p class="text-gray-700"><i class="fas fa-chart-line text-primary-500 mr-2"></i>GPA: 82.60%</p>
         </div>
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Grade 10 (SLC)</h3>
-          <p class="text-gray-600">Everest English Boarding School, Butwal, Nepal</p>
-          <p class="text-gray-600">Completed: 2015 | GPA: 89.75%</p>
+        
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-primary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-school text-primary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900">Grade 10 (SLC)</h3>
+              <p class="text-gray-600 font-medium">Everest English Boarding School, Butwal</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-2"><i class="fas fa-calendar-alt text-primary-500 mr-2"></i>Completed: 2015</p>
+          <p class="text-gray-700"><i class="fas fa-chart-line text-primary-500 mr-2"></i>GPA: 89.75%</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Experience Section -->
-  <section id="experience" class="py-16 bg-gray-100">
+  <section id="experience" class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 section">
-      <h2 class="text-3xl font-bold text-center mb-12">Professional Experience</h2>
-      <div class="space-y-6">
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Hydropower Engineer</h3>
-          <p class="text-gray-600">Hydro Tunneling and Research Pvt. Ltd, Kathmandu, Nepal</p>
-          <p class="text-gray-600">Jul 2023 - Ongoing</p>
-          <p class="text-gray-600">Hydraulics and headworks design, powerhouse planning, excavation planning, flood wall design, drafting (Civil 3D), report writing.</p>
-        </div>
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Site Engineer / Surveyor</h3>
-          <p class="text-gray-600">Engineering and Planning Solution Consultant (P) Ltd, Nepal</p>
-          <p class="text-gray-600">Mar 2023 - May 2023</p>
-          <p class="text-gray-600">Topographic surveys using Total Station, created structural/hydraulic maps (AutoCAD, ArcGIS), geotechnical assessments.</p>
-        </div>
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Civil Engineer</h3>
-          <p class="text-gray-600">Reef Engineering Consultant Pvt. Ltd, Nepal</p>
-          <p class="text-gray-600">Aug 2022 - Jan 2023</p>
-          <p class="text-gray-600">Structural design and analysis, BOQ preparation, site inspections.</p>
-        </div>
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Survey Enumerator</h3>
-          <p class="text-gray-600">Water and Energy Commission Secretariat, Government of Nepal</p>
-          <p class="text-gray-600">May 2022 - Jun 2022</p>
-          <p class="text-gray-600">Surveyed energy consumption, prepared socio-economic reports.</p>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 text-gray-900">Professional Experience</h2>
+        <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+      </div>
+      <div class="max-w-4xl mx-auto">
+        <div class="relative">
+          <!-- Timeline line -->
+          <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary-200 transform md:translate-x-1"></div>
+          
+          <!-- Experience items -->
+          <div class="mb-12 flex flex-col md:flex-row items-start">
+            <div class="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
+              <div class="bg-white p-6 rounded-2xl shadow-lg card">
+                <h3 class="text-xl font-bold text-gray-900">Hydropower Engineer</h3>
+                <p class="text-primary-600 font-medium">Hydro Tunneling and Research Pvt. Ltd, Kathmandu</p>
+                <p class="text-gray-600 my-2"><i class="far fa-calendar text-primary-500 mr-2"></i>Jul 2023 - Ongoing</p>
+                <p class="text-gray-700">Hydraulics and headworks design, powerhouse planning, excavation planning, flood wall design, drafting (Civil 3D), report writing.</p>
+              </div>
+            </div>
+            <div class="md:w-1/2 md:pl-8"></div>
+          </div>
+          
+          <div class="mb-12 flex flex-col md:flex-row items-start">
+            <div class="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0 md:order-2">
+              <div class="bg-white p-6 rounded-2xl shadow-lg card">
+                <h3 class="text-xl font-bold text-gray-900">Site Engineer / Surveyor</h3>
+                <p class="text-primary-600 font-medium">Engineering and Planning Solution Consultant (P) Ltd</p>
+                <p class="text-gray-600 my-2"><i class="far fa-calendar text-primary-500 mr-2"></i>Mar 2023 - May 2023</p>
+                <p class="text-gray-700">Topographic surveys using Total Station, created structural/hydraulic maps (AutoCAD, ArcGIS), geotechnical assessments.</p>
+              </div>
+            </div>
+            <div class="md:w-1/2 md:pl-8 md:order-1"></div>
+          </div>
+          
+          <div class="mb-12 flex flex-col md:flex-row items-start">
+            <div class="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0">
+              <div class="bg-white p-6 rounded-2xl shadow-lg card">
+                <h3 class="text-xl font-bold text-gray-900">Civil Engineer</h3>
+                <p class="text-primary-600 font-medium">Reef Engineering Consultant Pvt. Ltd</p>
+                <p class="text-gray-600 my-2"><i class="far fa-calendar text-primary-500 mr-2"></i>Aug 2022 - Jan 2023</p>
+                <p class="text-gray-700">Structural design and analysis, BOQ preparation, site inspections.</p>
+              </div>
+            </div>
+            <div class="md:w-1/2 md:pl-8"></div>
+          </div>
+          
+          <div class="flex flex-col md:flex-row items-start">
+            <div class="md:w-1/2 md:pr-8 md:text-right mb-4 md:mb-0 md:order-2">
+              <div class="bg-white p-6 rounded-2xl shadow-lg card">
+                <h3 class="text-xl font-bold text-gray-900">Survey Enumerator</h3>
+                <p class="text-primary-600 font-medium">Water and Energy Commission Secretariat, Government of Nepal</p>
+                <p class="text-gray-600 my-2"><i class="far fa-calendar text-primary-500 mr-2"></i>May 2022 - Jun 2022</p>
+                <p class="text-gray-700">Surveyed energy consumption, prepared socio-economic reports.</p>
+              </div>
+            </div>
+            <div class="md:w-1/2 md:pl-8 md:order-1"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Research Section -->
-  <section id="research" class="py-16 bg-white">
+  <section id="research" class="py-20 bg-white">
     <div class="container mx-auto px-4 section">
-      <h2 class="text-3xl font-bold text-center mb-12">Research Involvements</h2>
-      <div class="space-y-6">
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Optimizing Environmental Flow Trade-offs</h3>
-          <p class="text-gray-600">Energy Nexus (Under Review)</p>
-          <p class="text-gray-600">Authors: Neupane, Y. S., et al.</p>
-          <a href="http://ssrn.com/abstract=5362628" class="text-blue-500 hover:underline">View Paper</a>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 text-gray-900">Research Involvements</h2>
+        <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-secondary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-file-alt text-secondary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Optimizing Environmental Flow Trade-offs</h3>
+              <p class="text-gray-600">Energy Nexus (Under Review)</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4">Authors: Neupane, Y. S., et al.</p>
+          <a href="http://ssrn.com/abstract=5362628" class="inline-flex items-center text-primary-600 hover:text-primary-800 font-medium">
+            View Paper <i class="fas fa-arrow-right ml-2"></i>
+          </a>
         </div>
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Optimization of Storage Hydropower</h3>
-          <p class="text-gray-600">Water Practice and Technology (Under Review)</p>
-          <p class="text-gray-600">Authors: Neupane, Y. S., et al.</p>
+        
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-secondary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-file-alt text-secondary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Optimization of Storage Hydropower</h3>
+              <p class="text-gray-600">Water Practice and Technology (Under Review)</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4">Authors: Neupane, Y. S., et al.</p>
         </div>
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Moth Flame Optimization in Hydropower</h3>
-          <p class="text-gray-600">Nepal Journal of Civil Engineering (Accepted)</p>
-          <p class="text-gray-600">Authors: Neupane, Y. S., et al.</p>
+        
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-secondary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-file-alt text-secondary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">Moth Flame Optimization in Hydropower</h3>
+              <p class="text-gray-600">Nepal Journal of Civil Engineering (Accepted)</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4">Authors: Neupane, Y. S., et al.</p>
         </div>
-        <div class="card bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">SWAT Model Applicability in Nepal</h3>
-          <p class="text-gray-600">Journal of Advanced College of Engineering and Management (Accepted)</p>
-          <p class="text-gray-600">Authors: Shahi, T. B., Neupane, Y. S., et al.</p>
+        
+        <div class="card bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div class="flex items-start mb-4">
+            <div class="bg-secondary-100 p-3 rounded-lg mr-4">
+              <i class="fas fa-file-alt text-secondary-600 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">SWAT Model Applicability in Nepal</h3>
+              <p class="text-gray-600">Journal of Advanced College of Engineering and Management (Accepted)</p>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-4">Authors: Shahi, T. B., Neupane, Y. S., et al.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Awards Section -->
-  <section id="awards" class="py-16 bg-gray-100">
+  <section id="awards" class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 section">
-      <h2 class="text-3xl font-bold text-center mb-12">Awards & Certificates</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">First Position in M.Sc Hydropower Engineering</h3>
-          <p class="text-gray-600">Institute of Engineering, Tribhuvan University, 2025</p>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 text-gray-900">Awards & Certificates</h2>
+        <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="card bg-white p-8 rounded-2xl shadow-lg flex items-start">
+          <div class="bg-yellow-100 p-3 rounded-lg mr-4">
+            <i class="fas fa-trophy text-yellow-500 text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">First Position in M.Sc Hydropower Engineering</h3>
+            <p class="text-gray-600">Institute of Engineering, Tribhuvan University, 2025</p>
+          </div>
         </div>
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">MSc Fellowship Tenure</h3>
-          <p class="text-gray-600">Kathmandu University, NTNU Norway, SINTEF, 2025</p>
+        
+        <div class="card bg-white p-8 rounded-2xl shadow-lg flex items-start">
+          <div class="bg-blue-100 p-3 rounded-lg mr-4">
+            <i class="fas fa-medal text-blue-500 text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">MSc Fellowship Tenure</h3>
+            <p class="text-gray-600">Kathmandu University, NTNU Norway, SINTEF, 2025</p>
+          </div>
         </div>
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Gold Medal, Civil Engineering Model Competition</h3>
-          <p class="text-gray-600">Kathmandu University, 2019</p>
+        
+        <div class="card bg-white p-8 rounded-2xl shadow-lg flex items-start">
+          <div class="bg-yellow-100 p-3 rounded-lg mr-4">
+            <i class="fas fa-award text-yellow-500 text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Gold Medal, Civil Engineering Model Competition</h3>
+            <p class="text-gray-600">Kathmandu University, 2019</p>
+          </div>
         </div>
-        <div class="card bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Certificate of Training on RESCON 2</h3>
-          <p class="text-gray-600">World Bank, 2024</p>
+        
+        <div class="card bg-white p-8 rounded-2xl shadow-lg flex items-start">
+          <div class="bg-green-100 p-3 rounded-lg mr-4">
+            <i class="fas fa-certificate text-green-500 text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Certificate of Training on RESCON 2</h3>
+            <p class="text-gray-600">World Bank, 2024</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-blue-900 text-white py-8">
-    <div class="container mx-auto px-4 text-center">
-      <p>&copy; 2025 Yogesh Sharma Neupane. All rights reserved.</p>
-      <p>Contact: <a href="mailto:yogesh.s.neupane@gmail.com" class="text-blue-300 hover:underline">yogesh.s.neupane@gmail.com</a> | +977 9867754260</p>
+  <footer class="bg-gradient-to-r from-primary-800 to-secondary-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <h2 class="text-2xl font-bold mb-2">Yogesh Sharma Neupane</h2>
+          <p class="text-primary-200">Hydropower Engineer & Researcher</p>
+        </div>
+        <div class="flex space-x-6">
+          <a href="mailto:yogesh.s.neupane@gmail.com" class="bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="#" class="bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition">
+            <i class="fab fa-researchgate"></i>
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-primary-700 mt-8 pt-8 text-center">
+        <p>&copy; 2025 Yogesh Sharma Neupane. All rights reserved.</p>
+        <p class="mt-2">Contact: <a href="mailto:yogesh.s.neupane@gmail.com" class="text-primary-200 hover:text-white">yogesh.s.neupane@gmail.com</a> | +977 9867754260</p>
+      </div>
     </div>
   </footer>
 
@@ -179,6 +437,16 @@
       });
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
 </body>
 </html>
